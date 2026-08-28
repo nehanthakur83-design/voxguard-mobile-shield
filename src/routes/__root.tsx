@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "description",
         content: "Live AI voice deepfake detection for protected calls, on your phone.",
       },
-      { name: "theme-color", content: "#0d1520" },
+      { name: "theme-color", content: "#dfe4d2" },
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-title", content: "VoxGuard" },
