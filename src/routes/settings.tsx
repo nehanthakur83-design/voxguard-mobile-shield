@@ -38,7 +38,7 @@ function Settings() {
     setStatus(null);
     setApiUrl(url);
     try {
-      const res = await fetch(`${getApiUrl()}/health`);
+      const res = await fetch(`${getApiUrl()}/api/health`);
       setStatus(res.ok ? "Backend reachable." : `Backend responded with HTTP ${res.status}.`);
     } catch {
       setStatus("Could not reach the backend from this device.");

@@ -143,7 +143,17 @@ async function postAudio(path: string, file: Blob, filename: string): Promise<An
   try {
     response = await fetch(`${base}${path}`, { method: "POST", body });
   } catch {
-    throw new Error(`Cannot reach the analysis backend at ${base}.`);
+    const securePage = typeof window !== "undefined" && window.location.protocol === "https:";
+    if (securePage && base.startsWith("http://")) {
+      throw new Error(
+        `This page is served over HTTPS, so the browser blocks calls to ${base}. Expose your backend over HTTPS (e.g. an ngrok/Cloudflare tunnel) and set that URL in Settings.`,
+      );
+    }
+    throw new Error(
+      `Cannot reach the analysis backend at ${base}. Make sure uvicorn is running and that VOXGUARD_ALLOWED_ORIGINS includes ${
+        typeof window !== "undefined" ? window.location.origin : "this app's origin"
+      }.`,
+    );
   }
 
   let payload: Partial<AnalysisResult> | null = null;
